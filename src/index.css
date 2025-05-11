@@ -73,7 +73,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -118,5 +118,5 @@
 }
 
 .btn-outline {
-  @apply border border-primary text-primary px-6 py-3 rounded-lg hover:bg-primary hover:text-white transition-all;
+  @apply border border-primary text-primary px-6 py-3 rounded-lg hover:bg-primary hover:text-white transition-all dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400;
 }
