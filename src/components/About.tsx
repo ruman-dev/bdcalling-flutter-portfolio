@@ -1,19 +1,21 @@
 
-import { Check } from 'lucide-react';
+import { Check, Loader2 } from 'lucide-react';
+import { useProfile } from '@/hooks/useProfile';
+import { useSkills } from '@/hooks/useSkills';
 
 const About = () => {
-  const skills = [
-    "Flutter Framework",
-    "Dart Programming",
-    "Android Development",
-    "Kotlin/Java",
-    "State Management (Provider, Bloc, GetX)",
-    "Firebase Integration",
-    "RESTful API Integration",
-    "UI/UX Design Implementation",
-    "App Performance Optimization",
-    "App Publishing"
-  ];
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: skills, isLoading: skillsLoading } = useSkills();
+
+  if (profileLoading || skillsLoading) {
+    return (
+      <section id="about" className="py-20 bg-white dark:bg-slate-800">
+        <div className="section-container flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="about" className="py-20 bg-white dark:bg-slate-800">
@@ -23,8 +25,8 @@ const About = () => {
             <div className="relative">
               <div className="rounded-xl overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                  alt="Md. Ruman - Flutter & Android Developer at work" 
+                  src={profile?.profile_image || "https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec?ixlib=rb-4.0.3"}
+                  alt={`${profile?.name} - ${profile?.designation} at ${profile?.company}`} 
                   className="w-full object-cover aspect-square md:aspect-auto md:h-[500px]"
                 />
               </div>
@@ -33,22 +35,19 @@ const About = () => {
           </div>
           
           <div className="w-full md:w-3/5">
-            <h2 className="text-3xl font-bold mb-2">About Me</h2>
+            <h2 className="text-3xl font-bold mb-2 dark:text-white">About Me</h2>
             <div className="w-20 h-1.5 bg-primary mb-6"></div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              I am Md. Ruman, a passionate Flutter & Android developer currently working at <strong>bdcalling IT Ltd</strong>. With several years of experience in mobile app development, I specialize in creating beautiful, responsive, and functional applications that deliver exceptional user experiences.
-            </p>
-            <p className="text-gray-700 dark:text-gray-300 mb-6">
-              My journey in app development started with native Android platforms, but I quickly expanded my skills to include Flutter's capabilities and have been focused on mastering both frameworks ever since. I enjoy solving complex problems and turning ideas into reality through clean, efficient code.
+              {profile?.bio || `I am ${profile?.name}, a passionate ${profile?.designation} currently working at ${profile?.company}.`}
             </p>
             
-            <h3 className="text-xl font-semibold mb-4">My Skills</h3>
+            <h3 className="text-xl font-semibold mb-4 dark:text-white">My Skills</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mb-6">
-              {skills.map((skill, index) => (
-                <div key={index} className="flex items-center">
-                  <Check size={18} className="text-primary mr-2" />
-                  <span className="dark:text-gray-300">{skill}</span>
+              {skills?.map((skill) => (
+                <div key={skill.id} className="flex items-center">
+                  <Check size={18} className="text-primary mr-2 flex-shrink-0" />
+                  <span className="dark:text-gray-300">{skill.name}</span>
                 </div>
               ))}
             </div>

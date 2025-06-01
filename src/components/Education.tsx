@@ -1,73 +1,33 @@
 
-import { School, Book, Briefcase } from 'lucide-react';
+import { School, Book, Briefcase, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { useEducation } from '@/hooks/useEducation';
 
 const Education = () => {
-  const educationData = [
-    {
-      degree: "Bachelor of Science in Computer Science",
-      institution: "University of Engineering and Technology",
-      duration: "2016 - 2020",
-      description: "Graduated with honors. Specialized in Software Engineering with a focus on mobile application development."
-    },
-    {
-      degree: "Higher Secondary Certificate",
-      institution: "National College",
-      duration: "2014 - 2016",
-      description: "Completed with distinction in Science group with major subjects including Mathematics, Physics, and Computer Science."
-    }
-  ];
+  const { data: allEducation, isLoading } = useEducation();
 
-  const certifications = [
-    {
-      title: "Flutter Development Bootcamp",
-      issuer: "Udemy",
-      date: "2021",
-      description: "Comprehensive course covering advanced Flutter concepts, state management, and app architecture."
-    },
-    {
-      title: "Mobile App Development Specialization",
-      issuer: "Coursera",
-      date: "2020",
-      description: "Series of courses covering mobile app design, development, and deployment strategies."
-    },
-    {
-      title: "Firebase for Flutter",
-      issuer: "Google",
-      date: "2022",
-      description: "Specialized training on integrating Firebase services with Flutter applications."
-    }
-  ];
+  if (isLoading) {
+    return (
+      <section id="education" className="py-20 bg-white dark:bg-slate-800">
+        <div className="section-container flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      </section>
+    );
+  }
 
-  const experience = [
-    {
-      position: "Senior Flutter Developer",
-      company: "bdcalling IT Ltd",
-      duration: "2022 - Present",
-      description: "Leading a team of developers to build enterprise-level mobile applications. Responsible for architecture decisions, code reviews, and mentoring junior developers."
-    },
-    {
-      position: "Flutter Developer",
-      company: "bdcalling IT Ltd",
-      duration: "2020 - 2022",
-      description: "Developed and maintained multiple Flutter applications. Collaborated with design and backend teams to deliver high-quality mobile solutions."
-    },
-    {
-      position: "Mobile App Development Intern",
-      company: "Tech Solutions Inc.",
-      duration: "2019 - 2020",
-      description: "Assisted in developing mobile applications. Gained practical experience in app development workflows, coding standards, and collaboration."
-    }
-  ];
+  const educationData = allEducation?.filter(item => item.type === 'education') || [];
+  const certifications = allEducation?.filter(item => item.type === 'certification') || [];
+  const experience = allEducation?.filter(item => item.type === 'experience') || [];
 
   return (
-    <section id="education" className="py-20 bg-white">
+    <section id="education" className="py-20 bg-white dark:bg-slate-800">
       <div className="section-container">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">Education & Experience</h2>
+          <h2 className="text-3xl font-bold mb-2 dark:text-white">Education & Experience</h2>
           <div className="w-20 h-1.5 bg-primary mx-auto mb-6"></div>
-          <p className="max-w-2xl mx-auto text-gray-700">
+          <p className="max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
             My academic background and professional journey that shaped my expertise in Flutter development.
           </p>
         </div>
@@ -90,16 +50,16 @@ const Education = () => {
           
           <TabsContent value="education" className="mt-4 animate-fade-up">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {educationData.map((item, index) => (
-                <Card key={index} className="border border-gray-200 hover:shadow-md transition-shadow">
+              {educationData.map((item) => (
+                <Card key={item.id} className="border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow dark:bg-slate-700">
                   <CardContent className="p-6">
                     <div className="mb-2 flex items-center gap-2">
                       <School size={20} className="text-primary" />
-                      <span className="text-sm text-gray-500">{item.duration}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{item.duration}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-1">{item.degree}</h3>
-                    <p className="text-gray-600 mb-4">{item.institution}</p>
-                    <p className="text-gray-700">{item.description}</p>
+                    <h3 className="text-xl font-semibold mb-1 dark:text-white">{item.degree}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">{item.institution}</p>
+                    <p className="text-gray-700 dark:text-gray-300">{item.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -108,16 +68,16 @@ const Education = () => {
           
           <TabsContent value="certifications" className="mt-4 animate-fade-up">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {certifications.map((item, index) => (
-                <Card key={index} className="border border-gray-200 hover:shadow-md transition-shadow">
+              {certifications.map((item) => (
+                <Card key={item.id} className="border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow dark:bg-slate-700">
                   <CardContent className="p-6">
                     <div className="mb-2 flex items-center gap-2">
                       <Book size={20} className="text-primary" />
-                      <span className="text-sm text-gray-500">{item.date}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{item.duration}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-                    <p className="text-gray-600 mb-4">{item.issuer}</p>
-                    <p className="text-gray-700">{item.description}</p>
+                    <h3 className="text-xl font-semibold mb-1 dark:text-white">{item.degree}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">{item.institution}</p>
+                    <p className="text-gray-700 dark:text-gray-300">{item.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -126,16 +86,16 @@ const Education = () => {
           
           <TabsContent value="experience" className="mt-4 animate-fade-up">
             <div className="space-y-6">
-              {experience.map((item, index) => (
-                <Card key={index} className="border border-gray-200 hover:shadow-md transition-shadow">
+              {experience.map((item) => (
+                <Card key={item.id} className="border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow dark:bg-slate-700">
                   <CardContent className="p-6">
                     <div className="mb-2 flex items-center gap-2">
                       <Briefcase size={20} className="text-primary" />
-                      <span className="text-sm text-gray-500">{item.duration}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{item.duration}</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-1">{item.position}</h3>
-                    <p className="text-gray-600 mb-4">{item.company}</p>
-                    <p className="text-gray-700">{item.description}</p>
+                    <h3 className="text-xl font-semibold mb-1 dark:text-white">{item.degree}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">{item.institution}</p>
+                    <p className="text-gray-700 dark:text-gray-300">{item.description}</p>
                   </CardContent>
                 </Card>
               ))}
