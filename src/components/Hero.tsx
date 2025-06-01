@@ -16,14 +16,14 @@ const Hero = () => {
               Flutter & Android Developer
             </p>
             <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg">
-              I'm a specialized mobile application developer with expertise in Flutter and Android. Currently working at bdcalling IT Ltd, crafting innovative solutions for clients worldwide.
+              I'm a specialized mobile application developer with expertise in Flutter and Android. Currently working at SM Technology Ltd, crafting innovative solutions for clients worldwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="bg-primary hover:bg-primary/90 text-white">
                 View My Work
               </Button>
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-white">
-                Contact Me <ArrowRight className="ml-2 h-4 w-4" />
+                Hire Me <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </div>

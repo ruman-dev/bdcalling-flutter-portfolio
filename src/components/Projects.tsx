@@ -113,7 +113,7 @@ const Projects = () => {
         </Tabs>
 
         <div className="text-center">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white dark:border-primary dark:text-primary">
+          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white">
             View All Projects <ArrowRight size={16} className="ml-2" />
           </Button>
         </div>

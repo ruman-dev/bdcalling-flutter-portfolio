@@ -14,11 +14,11 @@ const Footer = () => {
       <div className="section-container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Flutter<span className="text-blue-400">Dev</span></h3>
+            <h3 className="text-2xl font-bold mb-4">Ruman<span className="text-blue-400">Dev</span></h3>
             <p className="text-gray-300 mb-6 max-w-md">
-              Professional Flutter developer creating beautiful, high-performance mobile applications. 
-              Currently working at bdcalling IT Ltd.
+              Building elegant, high-performance mobile apps with precision and passion. Turning ideas into powerful digital experiences — one pixel at a time.
             </p>
+            <div className="margin-top: 10px text-gray-100 font-medium mb-6 max-w-md"> Code with purpose. Design with intent. Deliver with excellence.</div>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
