@@ -1,4 +1,4 @@
-
+import { Check, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,10 +6,12 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { useContactMessages, ContactMessage } from '@/hooks/useContactMessages';
+import { useProfile } from '@/hooks/useProfile';
 
 const Contact = () => {
   const { toast } = useToast();
   const { mutate: sendMessage, isPending: isSubmitting } = useContactMessages();
+  const { data: profile, isLoading: profileLoading } = useProfile();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -48,7 +50,15 @@ const Contact = () => {
       }
     });
   };
-
+if (profileLoading) {
+    return (
+      <footer className="py-20 bg-white dark:bg-slate-800">
+        <div className="section-container flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      </footer>
+    );
+  }
   return (
     <section id="contact" className="py-20 bg-white dark:bg-slate-800">
       <div className="section-container">
@@ -71,7 +81,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium mb-1 dark:text-white">Email</h4>
-                  <p className="text-gray-700 dark:text-gray-300">contact@flutterdev.com</p>
+                  <p className="text-gray-700 dark:text-gray-300">{profile?.email}</p>
                 </div>
               </div>
 
@@ -81,7 +91,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium mb-1 dark:text-white">Phone</h4>
-                  <p className="text-gray-700 dark:text-gray-300">+880 123 456 7890</p>
+                  <p className="text-gray-700 dark:text-gray-300">{profile?.phone}</p>
                 </div>
               </div>
 
@@ -91,7 +101,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium mb-1 dark:text-white">Location</h4>
-                  <p className="text-gray-700 dark:text-gray-300">Dhaka, Bangladesh</p>
+                  <p className="text-gray-700 dark:text-gray-300">{profile?.location}</p>
                 </div>
               </div>
             </div>
@@ -99,7 +109,7 @@ const Contact = () => {
             <div className="mt-8">
               <h4 className="text-lg font-medium mb-4 dark:text-white">Follow Me</h4>
               <div className="flex space-x-4">
-                <a href="#" className="bg-white dark:bg-slate-600 p-3 rounded-full shadow-sm hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
+                <a href={profile?.github || "https://github.com"} className="bg-white dark:bg-slate-600 p-3 rounded-full shadow-sm hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="20" 
@@ -110,7 +120,7 @@ const Contact = () => {
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
                   </svg>
                 </a>
-                <a href="#" className="bg-white dark:bg-slate-600 p-3 rounded-full shadow-sm hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
+                <a href={profile?.linkedin || "https:linkedin.com"} className="bg-white dark:bg-slate-600 p-3 rounded-full shadow-sm hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="20" 

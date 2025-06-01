@@ -33,11 +33,10 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white dark:bg-slate-900 shadow-md py-3' 
-        : 'bg-transparent dark:bg-transparent py-5'
-    }`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+      ? 'bg-white dark:bg-slate-900 shadow-md py-3'
+      : 'bg-transparent dark:bg-transparent py-5'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between">
           <a href="#" className="text-xl md:text-2xl font-bold text-primary">
@@ -47,9 +46,9 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a 
-                key={item.name} 
-                href={item.href} 
+              <a
+                key={item.name}
+                href={item.href}
                 className="text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
               >
                 {item.name}
@@ -57,29 +56,36 @@ const Navbar = () => {
             ))}
             <div className="flex items-center gap-2">
               <Sun size={18} className="text-yellow-500 dark:text-yellow-200" />
-              <Switch 
+              <Switch
                 checked={theme === 'dark'}
                 onCheckedChange={toggleTheme}
               />
               <Moon size={18} className="text-gray-500 dark:text-blue-300" />
             </div>
-            <Button className="bg-primary hover:bg-primary/90 text-white">
-              Download CV
-            </Button>
+            <a
+              href="https://github.com/ruman-dev/my_resume/raw/main/Resume%20of%20Md.%20Ruman.pdf"
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-primary hover:bg-primary/90 text-white">
+                Download CV
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Navigation Button */}
           <div className="md:hidden flex items-center gap-4">
             <div className="flex items-center gap-1">
               <Sun size={16} className="text-yellow-500 dark:text-yellow-200" />
-              <Switch 
+              <Switch
                 checked={theme === 'dark'}
                 onCheckedChange={toggleTheme}
               />
               <Moon size={16} className="text-gray-500 dark:text-blue-300" />
             </div>
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)} 
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 dark:text-white hover:text-primary"
               aria-label="Toggle menu"
             >
